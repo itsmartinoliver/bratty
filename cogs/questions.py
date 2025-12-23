@@ -11,7 +11,7 @@ timezone = ZoneInfo("America/Chicago")
 # Time is hours in 24H format when the question gets sent
 question_time = 8
 question_role = 1452705714832408616
-question_channel = 1452075722784116878
+question_channel = 1453128924828663838
 
 archive_duration = 60 * 24
 
