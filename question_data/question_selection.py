@@ -11,7 +11,7 @@ if not os.path.exists(history_path):
     with open(history_path, "w") as f:
         pass
 
-max_entries = 9     
+max_entries = 50
 # Determines the number of questions that are stored in history and barred from being repeated.
 # The last {max_entries} questions cannot be chosen again
 
