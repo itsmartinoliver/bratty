@@ -29,6 +29,8 @@ class BrattyBot(commands.Bot):
         await self.load_extension("cogs.questions")
         await self.load_extension("cogs.show_tell")
         await self.load_extension("cogs.respond")
+        await self.load_extension("cogs.send")
+
 
     def save_config(self):
         with open(self.config_path, "w") as f:
