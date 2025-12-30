@@ -15,6 +15,7 @@ class QuestionBot(commands.Bot):
     async def setup_hook(self):
         await self.load_extension("cogs.questions")
         await self.load_extension("cogs.show_and_tell")
+        await self.load_extension("cogs.respond")
 
 bot = QuestionBot(intents)
 
