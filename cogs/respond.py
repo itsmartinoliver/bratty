@@ -24,14 +24,17 @@ class Respond(commands.Cog):
                 "user_ping_threshold": "5",
                 "total_ping_threshold": "10",
                 "time_threshold": "3600",
-                "crashout_channel": "0"
+                "crashout_channel": "0",
+                "owner_userID": "0"
             }
 
         self.constant_delay = float(bot.config["respond"]["constant_delay"])
         self.user_ping_threshold = int(bot.config["respond"]["user_ping_threshold"])
         self.total_ping_threshold = int(bot.config["respond"]["total_ping_threshold"])
         self.time_threshold = int(bot.config["respond"]["time_threshold"])
-        self.crashout_channel = int(bot.config["respond"]["time_threshold"])
+        self.crashout_channel = int(bot.config["respond"]["crashout_channel"])
+        self.owner_userID = int(bot.config["respond"]["owner_userID"])
+
 
         bot.save_config()
 
@@ -41,6 +44,9 @@ class Respond(commands.Cog):
             return
         if self.bot.user.mentioned_in(message):
             response, delay = await self.choose_response(message)
+            response = response.replace("{SENDER}", f"{message.author.mention}")
+            response = response.replace("{OWNER}", f"<@{self.owner_userID}>")
+
             if response == "":
                 return  # Bratty chooses to ignore
             await asyncio.sleep(self.constant_delay)
@@ -51,22 +57,35 @@ class Respond(commands.Cog):
 
     async def choose_response(self, message):
         user_ping_count, total_ping_count = count_recent_pings(message, self.time_threshold)
-        if user_ping_count > self.user_ping_threshold or total_ping_count > self.total_ping_threshold:
+        if total_ping_count > self.total_ping_threshold:
             return "", 0    # Send nothing
+        
+        if total_ping_count == self.total_ping_threshold - 1:
+            asyncio.create_task(self.crashout())
+            # Trigger the crashout message but don't return, as it should select the proper category for the main response
+
         if user_ping_count == self.user_ping_threshold:
             return select_from_file("berate.txt")
-        if total_ping_count == self.total_ping_threshold - 1:
-            # async with message.channel.typing():
-                # await asyncio.sleep(delay) 
-                # await message.channel.send(response)
-            return select_from_file("generic.txt")
         if total_ping_count == self.total_ping_threshold:
-            pass
+            return select_from_file("logoff.txt")
+        if "clanker" in message.content.lower():
+            return select_from_file("clank.txt")
+        if len(message.mentions) > 1:
+            return select_from_file("tagged.txt")
         if message.content.strip()[-1] == "?":
             return select_from_file("question.txt")
         else:
             return select_from_file("generic.txt")
                     
+    async def crashout(self):
+        response, delay = select_from_file("crashout.txt")
+        channel = self.bot.get_channel(self.crashout_channel)
+        if channel:
+            async with channel.typing():
+                await asyncio.sleep(delay) 
+                await channel.send(response)
+
+            
 def select_from_file(filename):
         with open("responses/" + filename) as f:
             lines = f.read().splitlines()
@@ -108,8 +127,10 @@ def count_recent_pings(message, time_threshold):
     
     i = 0
     while i < len(total_pings):
-        if timestamp - total_pings[i] < time_threshold:
+        if timestamp - total_pings[i] >= time_threshold:
             total_pings.pop(i)
+        else:
+            i += 1
 
     return len(user_pings[user_id]), len(total_pings)
 

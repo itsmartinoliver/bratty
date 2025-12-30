@@ -52,9 +52,12 @@ async def config(ctx, cog = None, field = None, value = None):
         await ctx.send("```\n"+json.dumps(bot.config, indent=4)+"\n```")
         return
     try:
-        bot.config[cog][field] = value
-        await ctx.send(f"Updated config: `{cog}/{field} = {value}`")
-        bot.save_config()
+        if(field in bot.config[cog]):
+            bot.config[cog][field] = value
+            await ctx.send(f"Updated config: `{cog}/{field} = {value}`")
+            bot.save_config()
+        else:
+            await ctx.send(f"Failed to update config: `{field} not found`")
     except Exception as e:
         await ctx.send(f"Failed to update config: `{e}`")
 
