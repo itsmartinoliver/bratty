@@ -42,7 +42,7 @@ class Respond(commands.Cog):
     async def on_message(self, message):
         if message.author == self.bot.user:
             return
-        if self.bot.user.mentioned_in(message):
+        if self.bot.user.mentioned_in(message) or "clanker" in message.content.lower():
             response, delay = await self.choose_response(message)
             response = response.replace("{SENDER}", f"{message.author.mention}")
             response = response.replace("{OWNER}", f"<@{self.owner_userID}>")
