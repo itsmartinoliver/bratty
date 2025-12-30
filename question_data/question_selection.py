@@ -16,8 +16,8 @@ max_entries = 50
 # The last {max_entries} questions cannot be chosen again
 
 def clear_history():
-    with open(history_path, "r+") as history_fp:
-        history_fp.truncate(0)
+    with open(history_path, "r+") as history_f:
+        history_f.truncate(0)
 
 def make_question_lists():
     """
@@ -27,8 +27,8 @@ def make_question_lists():
     """
     questions = []
     weights = []
-    with open(questions_path, "r") as questions_fp:
-        for line in questions_fp.readlines()[1:]:  # skip header
+    with open(questions_path, "r") as questions_f:
+        for line in questions_f.readlines()[1:]:  # skip header
             split_line = line.split("\t")
             questions.append(split_line[0].strip()) # strip() is just for safety, shouldn't normally have any effect
             weights.append(float(split_line[1]))
@@ -65,14 +65,14 @@ def choose_question():
     return question_choice
 
 def add_to_history(new_entry):
-    with open(history_path, "r") as history_fp:
-        lines = history_fp.read().splitlines()
+    with open(history_path, "r") as history_f:
+        lines = history_f.read().splitlines()
         while len(lines) >= max_entries:
             lines.pop(0)    # remove the top line, which is the oldest entry
         lines.append(new_entry)    # final entry did not previously have a new line, must add it now
     
-    with open(history_path, "w") as history_fp:
-        history_fp.write("\n".join(lines))
+    with open(history_path, "w") as history_f:
+        history_f.write("\n".join(lines))
 
 
 if __name__ == "__main__":

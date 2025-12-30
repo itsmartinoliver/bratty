@@ -1,10 +1,11 @@
 from discord.ext import commands
 import asyncio
-import random
 import os
+import time
 
-constant_delay = 0.5
 history_path = "responses/history.txt"
+user_pings = {}
+total_pings = []
 
 os.makedirs(os.path.dirname(history_path), exist_ok=True)
 
@@ -17,37 +18,66 @@ class Respond(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+        if "respond" not in bot.config:
+            bot.config["respond"] = {
+                "constant_delay": "0.5",
+                "user_ping_threshold": "5",
+                "total_ping_threshold": "10",
+                "time_threshold": "3600",
+                "crashout_channel": "0"
+            }
+
+        self.constant_delay = float(bot.config["respond"]["constant_delay"])
+        self.user_ping_threshold = int(bot.config["respond"]["user_ping_threshold"])
+        self.total_ping_threshold = int(bot.config["respond"]["total_ping_threshold"])
+        self.time_threshold = int(bot.config["respond"]["time_threshold"])
+        self.crashout_channel = int(bot.config["respond"]["time_threshold"])
+
+        bot.save_config()
+
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author == self.bot.user:
             return
         if self.bot.user.mentioned_in(message):
-            response, delay = await self.choose_response(message.content.strip())
-            await asyncio.sleep(constant_delay)
+            response, delay = await self.choose_response(message)
+            if response == "":
+                return  # Bratty chooses to ignore
+            await asyncio.sleep(self.constant_delay)
             async with message.channel.typing():
                 await asyncio.sleep(delay) 
                 await message.channel.send(response)
-        else:
-            await self.bot.process_commands(message)
 
 
     async def choose_response(self, message):
-        if message[-1] == "?":
+        user_ping_count, total_ping_count = count_recent_pings(message, self.time_threshold)
+        if user_ping_count > self.user_ping_threshold or total_ping_count > self.total_ping_threshold:
+            return "", 0    # Send nothing
+        if user_ping_count == self.user_ping_threshold:
+            return select_from_file("berate.txt")
+        if total_ping_count == self.total_ping_threshold - 1:
+            # async with message.channel.typing():
+                # await asyncio.sleep(delay) 
+                # await message.channel.send(response)
+            return select_from_file("generic.txt")
+        if total_ping_count == self.total_ping_threshold:
+            pass
+        if message.content.strip()[-1] == "?":
             return select_from_file("question.txt")
         else:
             return select_from_file("generic.txt")
                     
 def select_from_file(filename):
-        with open("responses/" + filename) as fp:
-            lines = fp.read().splitlines()
+        with open("responses/" + filename) as f:
+            lines = f.read().splitlines()
             index = get_history_index(filename, len(lines))
             line = lines[index % len(lines)]
             split_line = line.split("\t")
             return split_line[0], float(split_line[1])
 
 def get_history_index(filename, line_count):
-    with open(history_path, "r+") as history_fp:
-        lines = history_fp.read().splitlines()
+    with open(history_path, "r+") as history_f:
+        lines = history_f.read().splitlines()
         in_history = False
         for i in range(len(lines)):
             lines[i] = lines[i].split("\t")
@@ -59,12 +89,29 @@ def get_history_index(filename, line_count):
             index = 0
             lines.append([filename, "1"])
             # Going to use the first one (0) right away, so start the counter at 1
-        history_fp.seek(0)
+        history_f.seek(0)
         for i in range(len(lines)):
             lines[i] = "\t".join(lines[i])
-        history_fp.write("\n".join(lines))
-        history_fp.truncate()   # File can get smaller when it goes from double digit to single digit index
+        history_f.write("\n".join(lines))
+        history_f.truncate()   # File can get smaller when it goes from double digit to single digit index
         return index
+    
+def count_recent_pings(message, time_threshold):
+    user_id = message.author.id
+    timestamp = time.time()
+    if user_id not in user_pings:
+        user_pings[user_id] = []
+    user_pings[user_id].append(timestamp)
+    total_pings.append(timestamp)
+    
+    user_pings[user_id] = [ping_time for ping_time in user_pings[user_id] if timestamp - ping_time < time_threshold]
+    
+    i = 0
+    while i < len(total_pings):
+        if timestamp - total_pings[i] < time_threshold:
+            total_pings.pop(i)
+
+    return len(user_pings[user_id]), len(total_pings)
 
 async def setup(bot):
     await bot.add_cog(Respond(bot))
