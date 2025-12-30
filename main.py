@@ -19,7 +19,7 @@ class BrattyBot(commands.Bot):
                 self.config = json.load(f)
         else:
             self.config = {
-                "Global": {
+                "global": {
                     "timezone": "America/Chicago"
                 }
             }
@@ -27,7 +27,7 @@ class BrattyBot(commands.Bot):
 
     async def setup_hook(self):
         await self.load_extension("cogs.questions")
-        await self.load_extension("cogs.show_and_tell")
+        await self.load_extension("cogs.show_tell")
         await self.load_extension("cogs.respond")
 
     def save_config(self):
@@ -47,18 +47,15 @@ async def reload(ctx, extension):
 
 @bot.command()
 @commands.has_permissions(administrator=True)
-async def config(ctx, cog, field, value):
+async def config(ctx, cog = None, field = None, value = None):
+    if(cog == None):
+        await ctx.send("```\n"+json.dumps(bot.config, indent=4)+"\n```")
+        return
     try:
         bot.config[cog][field] = value
-        await ctx.send(f"Updated config: {cog}/{field} = {value}")
+        await ctx.send(f"Updated config: `{cog}/{field} = {value}`")
         bot.save_config()
     except Exception as e:
         await ctx.send(f"Failed to update config: `{e}`")
-
-@bot.command()
-@commands.has_permissions(administrator=True)
-async def view_config(ctx):
-    print(f"Command triggered! Memory ID: {id(bot)}")
-    await ctx.send("```\n"+json.dumps(bot.config, indent=4)+"\n```")
 
 bot.run(TOKEN)
