@@ -1,7 +1,7 @@
-quiet	1
+Be quiet	1
 Leave me alone	2
 We are not friends, I do not wish to associate with you :smiling_face_with_3_hearts:	4
-shush	2
+Shush	2
 Why was I created just so yall could ping me with your bs	4
 :rolling_eyes: :rolling_eyes:	3
 I gotta turn my notifications off	3
