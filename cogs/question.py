@@ -6,22 +6,22 @@ import question_data.question_selection as question_selection
 
 importlib.reload(question_selection)    # Reloading the cog also reloads the question_selection module
 
-class Questions(commands.Cog):
+class Question(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-        if "questions" not in bot.config:
-            bot.config["questions"] = {
+        if "question" not in bot.config:
+            bot.config["question"] = {
                 "channel": "0",
                 "role": "0",
                 "hour": "8",
                 "minute": "0"
             }
 
-        self.channel = int(bot.config["questions"]["channel"])
-        self.role = int(bot.config["questions"]["role"])
-        self.hour = int(bot.config["questions"]["hour"])
-        self.minute = int(bot.config["questions"]["minute"])
+        self.channel = int(bot.config["question"]["channel"])
+        self.role = int(bot.config["question"]["role"])
+        self.hour = int(bot.config["question"]["hour"])
+        self.minute = int(bot.config["question"]["minute"])
         self.timezone = ZoneInfo(bot.config["global"]["timezone"])
 
         self.daily_question.change_interval(time=datetime.time(hour=self.hour, minute=self.minute, tzinfo=self.timezone))
@@ -58,4 +58,4 @@ class Questions(commands.Cog):
         question_selection.clear_history()
 
 async def setup(bot):
-    await bot.add_cog(Questions(bot))
+    await bot.add_cog(Question(bot))

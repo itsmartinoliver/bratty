@@ -3,7 +3,7 @@ import asyncio
 import os
 import time
 
-history_path = "responses/history.txt"
+history_path = "respond_data/history.txt"
 user_pings = {}
 total_pings = []
 
@@ -34,7 +34,6 @@ class Respond(commands.Cog):
         self.time_threshold = int(bot.config["respond"]["time_threshold"])
         self.crashout_channel = int(bot.config["respond"]["crashout_channel"])
         self.owner_userID = int(bot.config["respond"]["owner_userID"])
-
 
         bot.save_config()
 
@@ -87,7 +86,7 @@ class Respond(commands.Cog):
 
             
 def select_from_file(filename):
-        with open("responses/" + filename) as f:
+        with open("respond_data/" + filename) as f:
             lines = f.read().splitlines()
             index = get_history_index(filename, len(lines))
             line = lines[index % len(lines)]
