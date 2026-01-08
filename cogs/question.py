@@ -52,6 +52,10 @@ class Question(commands.Cog):
 
     async def post_thread(self, content):
         channel = self.bot.get_channel(self.channel)
+        thread_content = content
+        if len(content) > 100:
+            thread_content = thread_content[:97] + "..."
+        print(len(thread_content))
         if channel:
             date = datetime.datetime.now(self.timezone).strftime("%m/%d/%Y")
             message = await channel.send(f"## Question of the Day: {date}")
