@@ -59,7 +59,7 @@ class Question(commands.Cog):
         if channel:
             date = datetime.datetime.now(self.timezone).strftime("%m/%d/%Y")
             message = await channel.send(f"## Question of the Day: {date}")
-            thread = await message.create_thread(name=f"{content}", auto_archive_duration = 60*24)
+            thread = await message.create_thread(name=f"{thread_content}", auto_archive_duration = 60*24)
             await thread.send(f"<@&{self.role}>: {content}")
 
 
