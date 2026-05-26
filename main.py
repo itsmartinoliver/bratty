@@ -98,15 +98,17 @@ def update_config(cog, field, arg1, arg2):
 
 @bot.command()
 @commands.has_permissions(administrator=True)
-async def mod_config(cog, field, arg):
+async def mod_config(ctx, cog, field, arg = None):
     try:
         if(field in bot.config[cog]):
-            if(arg == ""):
+            if not arg:
                 bot.config[cog].pop(field)
+                await ctx.send(f"Removed Config: `{cog}/{field}`")
             else:
-                return update_config(cog, field, arg, None)
+                config(ctx, cog, field, arg, None)
         else:
             bot.config[cog][field] = arg
+            await ctx.send(f"Added Config: `{cog}/{field} = {bot.config[cog][field]}`")
     except Exception as e:
         return False, str(e)
 
