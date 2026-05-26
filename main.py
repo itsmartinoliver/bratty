@@ -98,7 +98,7 @@ def update_config(cog, field, arg1, arg2):
 
 @bot.command()
 @commands.has_permissions(administrator=True)
-def mod_config(cog, field, arg):
+async def mod_config(cog, field, arg):
     try:
         if(field in bot.config[cog]):
             if(arg == ""):
