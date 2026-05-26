@@ -93,6 +93,20 @@ def update_config(cog, field, arg1, arg2):
     except Exception as e:
         return False, str(e)
 
+@bot.command()
+@commands.has_permissions(administrator=True)
+def mod_config(cog, field, arg):
+    try:
+        if(field in bot.config[cog]):
+            if(arg == ""):
+                bot.config[cog].pop(field)
+            else:
+                return update_config(cog, field, arg, None)
+        else:
+            bot.config[cog][field] = arg
+    except Exception as e:
+        return False, str(e)
+
 try:
     bot.run(TOKEN)
 except Exception as e:
