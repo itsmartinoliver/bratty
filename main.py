@@ -40,9 +40,12 @@ class BrattyBot(commands.Bot):
 
     async def debug(self, message):
         print(message, flush=True)
-        debug_channel = bot.get_channel(int(bot.config["global"]["debug_channel"]))
-        if debug_channel:
-            await debug_channel.send(message)
+        try:
+            debug_channel = bot.get_channel(int(bot.config["global"]["debug_channel"]))
+            if debug_channel:
+                await debug_channel.send(message)
+        except:
+            pass
         
     def save_config(self):
         with open(config_path, "w") as f:
