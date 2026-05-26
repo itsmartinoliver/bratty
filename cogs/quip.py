@@ -49,7 +49,7 @@ class Quip(commands.Cog):
 
     def cog_unload(self):
         self.plan_quip.cancel()
-        if self.send_quip.is_running:
+        if self.send_quip.is_running():
             self.send_quip.cancel()
 
     @tasks.loop(time=datetime.time(hour=0)) # Loop timing timezone is set by constructor
@@ -59,18 +59,18 @@ class Quip(commands.Cog):
             quip_hour = random.randint(self.start_hour, self.end_hour)
             quip_minute = random.randint(self.start_minute, self.end_minute)
 
-            if self.send_quip.is_running:
-                self.send_quip.stop()
-            self.send_quip.change_interval(time=datetime.time(hour=quip_hour, minute=quip_minute, tzinfo=self.timezone))
-            self.send_quip.start()
-            print(f"Quip planned for {quip_hour}:{quip_minute:02d}", flush=True)
+            if not self.send_quip.is_running():
+                self.send_quip.change_interval(time=datetime.time(hour=quip_hour, minute=quip_minute, tzinfo=self.timezone))
+                self.send_quip.start()
+            await self.bot.debug(f"Quip planned for {quip_hour}:{quip_minute:02d}")
         else:
             self.send_quip.stop()
-            print("Quip not planned", flush=True)
+            await self.bot.debug("Quip not planned")
 
 
     @tasks.loop(time=datetime.time(hour=0)) # Loop timing will be changed by plan_quip
     async def send_quip(self):
+        self.send_quip.stop() # self terminate the scheduling so it is only scheduled by plan_quip
         channelID = int(random.choice(self.channels))
         channel = self.bot.get_channel(channelID)
         quip = self.choose_quip()

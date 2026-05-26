@@ -55,7 +55,6 @@ class Question(commands.Cog):
         thread_content = content
         if len(content) > 100:
             thread_content = thread_content[:97] + "..."
-        print(len(thread_content))
         if channel:
             date = datetime.datetime.now(self.timezone).strftime("%m/%d/%Y")
             message = await channel.send(f"## Question of the Day: {date}")

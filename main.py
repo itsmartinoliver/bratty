@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 import discord
 from discord.ext import commands
 import json
+import traceback
+
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -20,19 +22,28 @@ class BrattyBot(commands.Bot):
         else:
             self.config = {
                 "global": {
-                    "timezone": "America/Chicago"
+                    "timezone": "America/Chicago",
+                    "debug_channel": "0"
                 }
             }
             self.save_config()
 
     async def setup_hook(self):
         await self.load_extension("cogs.question")
-        await self.load_extension("cogs.show_tell")
+        # await self.load_extension("cogs.show_tell")
         await self.load_extension("cogs.respond")
         await self.load_extension("cogs.send")
         await self.load_extension("cogs.quip")
 
+    async def on_ready(self):
+        await self.debug("Setup Complete")
 
+    async def debug(self, message):
+        print(message, flush=True)
+        debug_channel = bot.get_channel(int(bot.config["global"]["debug_channel"]))
+        if debug_channel:
+            await debug_channel.send(message)
+        
     def save_config(self):
         with open(config_path, "w") as f:
             json.dump(self.config, f, indent=4)
@@ -82,4 +93,7 @@ def update_config(cog, field, arg1, arg2):
     except Exception as e:
         return False, str(e)
 
-bot.run(TOKEN)
+try:
+    bot.run(TOKEN)
+except Exception as e:
+    bot.debug(traceback.format_exc())
