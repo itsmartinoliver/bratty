@@ -90,6 +90,7 @@ def update_config(cog, field, arg1, arg2):
                         return False, f"invalid list operation '{field}'"
             else:
                 bot.config[cog][field] = arg1
+            bot.save_config()
             return True, None
         else:
             return False, f"{field} not found"
@@ -109,8 +110,9 @@ async def mod_config(ctx, cog, field, arg = None):
         else:
             bot.config[cog][field] = arg
             await ctx.send(f"Added Config: `{cog}/{field} = {bot.config[cog][field]}`")
+        bot.save_config()
     except Exception as e:
-        return False, str(e)
+        pass
 
 try:
     bot.run(TOKEN)
