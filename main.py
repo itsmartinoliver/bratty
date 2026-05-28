@@ -46,6 +46,11 @@ class BrattyBot(commands.Bot):
                 await debug_channel.send(message)
         except:
             pass
+
+    async def on_command_error(self, ctx, error):
+        error_str = "".join(traceback.format_exception(type(error), error, error.__traceback__))
+        await self.debug("```\n" + error_str+"\n```")
+        raise error
         
     def save_config(self):
         with open(config_path, "w") as f:
@@ -114,7 +119,5 @@ async def mod_config(ctx, cog, field, arg = None):
     except Exception as e:
         pass
 
-try:
-    bot.run(TOKEN)
-except Exception as e:
-    bot.debug(traceback.format_exc())
+bot.run(TOKEN)
+
