@@ -1,101 +1,102 @@
-Question	Weight
-What is the skill that you've learned that has improved your life the most?	1
-What is the most useless talent or skill you possess? How did you learn it?	1
-Who do you think is your celebrity look alike?	1
-What are you scared of as an adult that you weren't scared of as a kid?	1
-What is a question you wish people asked you more? What is your answer?	1
-How have you been spending your free time recently?	2
-When was the last time you made a child cry? (We all have done it at some point)	1
-What was your most expensive mistake?	1
-What was the happiest moment in your life?	1
-If you could master any skill instantly, what would you choose?	1
-What talent would you show off in a talent show?	1
-What is your best party trick?	1
-What is a mistake you made that you have kept hidden from someone close to you?	1
-What is the best sport (to play or watch) and why is it better than everything else?	1
-What is something you have been thankful for recently?	5
-What is the worst injury you have ever suffered? How did it happen?	1
-What is the weirdest dream you remember?	1
-What is a funny story from your childhood?	1
-Who is your arch nemesis?	1
-What quotes have stuck with you?	1
-What was the best advice you have ever recieved?	1
-What is your earliest memory?	1
-What nicknames have you had?	1
-What is at the top of your bucket list?	1
-What is a brief summary of your outlook on life?	1
-If you had a Ted Talk, what would it be about?	1
-When was the last time you crashed out?	2
-What are some lies your parents told you as a child that you believed? When did you find out they were lies?	1
-How did your parents choose your name?	1
-What does your name mean? Do you feel like this fits you as a person?	1
-If you had to choose a new name for yourself, what would you choose and why?	1
-What is the best compliment you've ever recieved?	1
-What is the biggest red flag in a person?	1
-Who has been your favorite teacher up to this point in your life? What made them stand out?	1
-Have you ever been in a physical fight? Do you think it was justified?	1
-What pieces of media have been most impactful to you?	1
-What food do you hate the most?	1
-What is a book you would reccommend everybody read?	1
-What is your favorite movie of all time?	1
-What is true about yourself today that would make your younger self proud?	1
-If you could speak directly to your younger self, what advice would you give them?	1
-What hyperfixations did you have as a child? Do you still have any interest in these things?	1
-What is a recent act of kindness that someone has done for you?	3
-What is the most beautiful view you have ever seen?	1
-What is the biggest green flag in a person?	1
-What is your comfort TV show?	1
-What is something you have always done and only realized as an adult that it was weird?	1
-If your life was a book, what would this chapter be titled?	1
-What is a small, seemingly insignificant decision you made that ended up having a major impact on your life?	1
-What is something you do that people might think isn't very significant, but it's actually very meaningful to you?	1
-Who is the person who had the most positive impact on your life?	1
-What is the most trivial thing that you have a strong opinion about?	1
-What single event do you think of as the biggest turning point in your life?	1
-What is something you're proud about but don't get to brag about much? Now is your chance!	1
-What is your biggest non-academic, non-work-related accomplishment?	1
-What is something you never thought you'd be able to do until you actually did it?	1
-What is something you've been meaning to do but haven't done yet? Why haven't you done it?	1
-What do you get the most compliments about?	1
-What is a childhood habit that you'll never outgrow?	1
-Which of your flaws are you msot proud of?	1
-If you could ask your future self one thing, what would it be?	1
-What is something you've done that you would recommend everyone do in their life?	1
-What is one thing you wish everybody knew about you without you having to tell them?	1
-What trait do you admire in others that you don't possess yourself?	1
-What is something people admire about you?	1
-What small, insignificant thing gives you joy?	1
-What is something that most people find challenging but has always come easily to you?	0.5
-What is something that most people find easy but has always been challenging to you?	0.5
-What is something you love that most people hate?	0.75
-What is something you hate that most people love?	0.25
-What are you glad you learned as a child that would be way harder to learn now as an adult?	1
-What is something that can't be taught but needs to be experienced to be understood?	1
-If you could know for certain the answer to any single question, what question would you pick?	1
-What is something you enjoyed doing only once and would never do again?	1
-Is there something you want to tell someone, but haven't? What is stopping you?	1
-What is a rant you've been holding in?	1
-What activity makes you lose track of time?	1
-What are you not grateful enough for?	1
-What is the smallest thing that has ruined your whole day?	1
-When was the last time you tried something new? What was it, and did you enjoy it?	2
-What has been the highlight of the past month?	2
-What is your favorite snack?	1
-What is a piece of shocking "lore" from your past that a lot of people don't know?	1
-What is your catch phrase?	1
-What is something you wish you were better at?	1
-What is a social norm that you choose to not follow?	1
-What is a piece of technology you wish never existed?	1
-What is the most irrational superstition you have?	1
-What is your idea of a perfect day?	1
-What makes you feel the most fulfilled?	1
-What is something you're looking forward to in the next month?	2
-What is your most treasured possession?	1
-What does your dream house look like?	1
-What is one goal you have for the near future?	1
-What do you think the meaning of life is?	1
-What would you do if you had infinite money? (Ignore inflation because that's boring!)	1
-What is a profound interaction you've had with a stranger?	1
-What do you consider to be your personal calling?	1
-What is the funniest way someone has butchered your name?	1
-What is the strangest interaction you have had at work?	1
+Question	Minimum Days before repeating (blank means never repeat)
+What is the skill that you've learned that has improved your life the most?	
+What is the most useless talent or skill you possess? How did you learn it?	
+Who do you think is your celebrity look alike?	
+What are you scared of as an adult that you weren't scared of as a kid?	
+What is a question you wish people asked you more? What is your answer?	
+How have you been spending your free time recently?	30
+When was the last time you made a child cry? (We all have done it at some point)	
+What was your most expensive mistake?	
+What was the happiest moment in your life?	
+If you could master any skill instantly, what would you choose?	
+What talent would you show off in a talent show?	
+What is your best party trick?	
+What is a mistake you made that you have kept hidden from someone close to you?	
+What is the best sport (to play or watch) and why is it better than everything else?	
+What is something you have been thankful for recently?	14
+What is the worst injury you have ever suffered? How did it happen?	
+What is the weirdest dream you remember?	
+What is a funny story from your childhood?	
+Who is your arch nemesis?	
+What quotes have stuck with you?	
+What was the best advice you have ever recieved?	
+What is your earliest memory?	
+What nicknames have you had?	
+What is at the top of your bucket list?	
+What is a brief summary of your outlook on life?	
+If you had a Ted Talk, what would it be about?	
+When was the last time you crashed out?	30
+What are some lies your parents told you as a child that you believed? When did you find out they were lies?	
+How did your parents choose your name?	
+What does your name mean? Do you feel like this fits you as a person?	
+If you had to choose a new name for yourself, what would you choose and why?	
+What is the best compliment you've ever recieved?	
+What is the biggest red flag in a person?	
+Who has been your favorite teacher up to this point in your life? What made them stand out?	
+Have you ever been in a physical fight? Do you think it was justified?	
+What pieces of media have been most impactful to you?	
+What food do you hate the most?	
+What is a book you would reccommend everybody read?	
+What is your favorite movie of all time?	
+What is true about yourself today that would make your younger self proud?	
+If you could speak directly to your younger self, what advice would you give them?	
+What hyperfixations did you have as a child? Do you still have any interest in these things?	
+What is a recent act of kindness that someone has done for you?	21
+What is the most beautiful view you have ever seen?	
+What is the biggest green flag in a person?	
+What is your comfort TV show?	
+What is something you have always done and only realized as an adult that it was weird?	
+If your life was a book, what would this chapter be titled?	
+What is a small, seemingly insignificant decision you made that ended up having a major impact on your life?	
+What is something you do that people might think isn't very significant, but it's actually very meaningful to you?	
+Who is the person who had the most positive impact on your life?	
+What is the most trivial thing that you have a strong opinion about?	
+What single event do you think of as the biggest turning point in your life?	
+What is something you're proud about but don't get to brag about much? Now is your chance!	
+What is your biggest non-academic, non-work-related accomplishment?	
+What is something you never thought you'd be able to do until you actually did it?	
+What is something you've been meaning to do but haven't done yet? Why haven't you done it?	
+What do you get the most compliments about?	
+What is a childhood habit that you'll never outgrow?	
+Which of your flaws are you msot proud of?	
+If you could ask your future self one thing, what would it be?	
+What is something you've done that you would recommend everyone do in their life?	
+What is one thing you wish everybody knew about you without you having to tell them?	
+What trait do you admire in others that you don't possess yourself?	
+What is something people admire about you?	
+What small, insignificant thing gives you joy?	
+What is something that most people find challenging but has always come easily to you?	
+What is something that most people find easy but has always been challenging to you?	
+What is something you love that most people hate?	
+What is something you hate that most people love?	
+What are you glad you learned as a child that would be way harder to learn now as an adult?	
+What is something that can't be taught but needs to be experienced to be understood?	
+If you could know for certain the answer to any single question, what question would you pick?	
+What is something you enjoyed doing only once and would never do again?	
+Is there something you want to tell someone, but haven't? What is stopping you?	
+What is a rant you've been holding in?	
+What activity makes you lose track of time?	
+What are you not grateful enough for?	
+What is the smallest thing that has ruined your whole day?	
+When was the last time you tried something new? What was it, and did you enjoy it?	30
+What has been the highlight of the past month?	30
+What is your favorite snack?	
+What is a piece of shocking "lore" from your past that a lot of people don't know?	
+What is your catch phrase?	
+What is something you wish you were better at?	
+What is a social norm that you choose to not follow?	
+What is a piece of technology you wish never existed?	
+What is the most irrational superstition you have?	
+What is your idea of a perfect day?	
+What makes you feel the most fulfilled?	
+What is something you're looking forward to in the next month?	30
+What is your most treasured possession?	
+What does your dream house look like?	
+What is one goal you have for the near future?	
+What do you think the meaning of life is?	
+What would you do if you had infinite money? (Ignore inflation because that's boring!)	
+What is a profound interaction you've had with a stranger?	
+What do you consider to be your personal calling?	
+What is the funniest way someone has butchered your name?	
+What is the strangest interaction you have had at work?	
+What song has been stuck in your head recently?	21
