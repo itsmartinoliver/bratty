@@ -48,6 +48,10 @@ class Question(commands.Cog):
     async def daily_question(self):
         question_choice = await self.choose_question()
         await self.post_thread(question_choice)
+        
+    @daily_question.error
+    async def daily_question_error(self, error):
+        await self.bot.report_error(error)
 
     async def post_thread(self, content):
         channel = self.bot.get_channel(self.channel)
@@ -71,6 +75,12 @@ class Question(commands.Cog):
     async def clear_history(self, ctx):
         with open(history_path, "r+") as history_f:
             history_f.truncate(0)
+
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def see_valid_questions(self, ctx):
+        list = await self.make_question_list()
+        await self.bot.debug("```" + "\n".join(list) + "```")
 
     async def make_question_list(self):
         """

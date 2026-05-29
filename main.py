@@ -47,10 +47,17 @@ class BrattyBot(commands.Bot):
         except:
             pass
 
-    async def on_command_error(self, ctx, error):
+    async def report_error(self, error):
         error_str = "".join(traceback.format_exception(type(error), error, error.__traceback__))
-        await self.debug("```\n" + error_str+"\n```")
+        await self.debug("```\n" + error_str + "\n```")
+
+    async def on_command_error(self, ctx, error):
+        await self.report_error(error)
         raise error
+    
+    async def on_error(self, ctx, error):
+        await self.report_error(error)
+
         
     def save_config(self):
         with open(config_path, "w") as f:

@@ -67,6 +67,9 @@ class Quip(commands.Cog):
             self.send_quip.stop()
             await self.bot.debug("Quip not planned")
 
+    @plan_quip.error
+    async def plan_quip_error(self, error):
+        await self.bot.report_error(error)
 
     @tasks.loop(time=datetime.time(hour=0)) # Loop timing will be changed by plan_quip
     async def send_quip(self):
@@ -76,6 +79,10 @@ class Quip(commands.Cog):
         quip = self.choose_quip()
         await channel.send(quip)
         
+    @send_quip.error
+    async def send_quip_error(self, error):
+        await self.bot.report_error(error)
+
     def choose_quip(self):
         with open(quip_path, "r") as quip_fp:
             quips = quip_fp.read().splitlines()
